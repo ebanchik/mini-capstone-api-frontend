@@ -67,6 +67,7 @@ export function Content() {
 
   return (
     <div>
+    <div className="container"></div>
       <ProductsNew onCreateProduct={handleCreateProduct}/>
       <ProductsIndex products={products} onShowProduct={handleShowProduct}/>
       <Modal show={isProductShowVisible} onClose={handleClose}>
