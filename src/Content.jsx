@@ -5,20 +5,32 @@ import { ProductsNew } from "./ProductsNew";
 import { ProductsShow } from "./ProductsShow";
 import { Modal } from "./Modal"
 import { Signup } from "./Signup"
+import { Login } from "./Login"
+import { LogoutLink } from "./Logout"
+import { Routes, Route } from "react-router-dom";
+import { CartedProductsIndex } from "./CartedProductsIndex"
+
 
 export function Content() {
   const [products, setProducts]= useState([]);
   const [isProductShowVisible, setIsProductsShowVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
 
+  const handleIndexCart = () => {
+    console.log("handleCartIndex");
+    axios.get("http://localhost:3000/cart.json").then((response) => {
+      console.log(response.data);
+      setProducts(response.data);
+    });
+  };
+  
   const handleIndexProducts = () => {
-    console.log("handleIndexPorducts");
+    console.log("handleIndexProducts");
     axios.get("http://localhost:3000/products.json").then((response) => {
       console.log(response.data);
       setProducts(response.data);
     });
   };
-
   const handleCreateProduct = (params, successCallback) => {
     console.log("handleCreateProducts", params);
     axios.post("http://localhost:3000/products.json", params).then((response) => {
@@ -65,13 +77,21 @@ export function Content() {
 
 
   useEffect(handleIndexProducts, []);
+  // useEffect(handleIndexCart, []);
 
   return (
     <div>
     <div className="container"></div>
-      <Signup/>
-      <ProductsNew onCreateProduct={handleCreateProduct}/>
-      <ProductsIndex products={products} onShowProduct={handleShowProduct}/>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/" element={ <ProductsIndex products={products} onShowProduct={handleShowProduct}/>} />
+        <Route path="/products" element={ <ProductsIndex products={products} onShowProduct={handleShowProduct}/>} />
+        <Route path="/products/new" element={<ProductsNew onCreateProduct={handleCreateProduct}/>} />
+        <Route path="/cart" element={ <CartedProductsIndex/>} />
+      </Routes>
+      
+      <LogoutLink/>
       <Modal show={isProductShowVisible} onClose={handleClose}>
         <ProductsShow product={currentProduct} onUpdateProduct={handleUpdateProduct} onDestroyProduct={handleDestroyProduct}/>
       </Modal>

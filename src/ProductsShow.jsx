@@ -1,4 +1,15 @@
+import axios from 'axios'
+
 export function ProductsShow(props) {
+
+  const addToCart = (event) => {
+    console.log('adding to cart...')
+    event.preventDefault();    
+    const params = new FormData(event.target);    
+    axios.post('http://localhost:3000/add_to_cart.json', params).then(response => {
+      console.log(response.data)
+    })
+  }
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,11 +24,24 @@ export function ProductsShow(props) {
   return (
     <div>
       <h1>Product information</h1>
+      <p>id: {props.product.id}</p>
       <p>Name: {props.product.name}</p>
       <p>Price: {props.product.price}</p>
       <p>Description: {props.product.description}</p>
       <p>Supplier ID: {props.product.supplier_id}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addToCart}>
+        <div>
+          <input name="product_id" type="hidden" defaultValue={props.product.id}   />
+        </div>
+        <div>
+          Quantity: <input name="quantity" type="text" />
+        </div>
+        <button type="submit">Add To Cart</button>
+
+      </form>
+      
+      
+      {/* <form onSubmit={handleSubmit}>
         <div>
           Name: <input defaultValue={props.product.name} name="name" type="text" />
         </div>
@@ -32,7 +56,7 @@ export function ProductsShow(props) {
         </div>
         <button type="submit">Update Product</button>
       </form>
-        <button onClick={handleClick}>Destroy Product</button>
+        <button onClick={handleClick}>Destroy Product</button> */}
     </div>
   );
 }

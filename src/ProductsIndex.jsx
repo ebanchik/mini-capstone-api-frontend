@@ -9,7 +9,7 @@ export function ProductsIndex(props) {
             <div className="card-body">
               <h5 className="card-header">{product.name}</h5>
               <p className="card-text">{product.description}</p>
-              <img src={product.images[0].url} className="card-img-top" alt="..."/>
+              {/* <img src={product.images[0].url} className="card-img-top" alt="..."/> */}
               <button className="btn btn-primary" onClick={() => props.onShowProduct(product)}>More info</button>            
             </div>
           </div>
