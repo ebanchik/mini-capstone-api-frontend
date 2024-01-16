@@ -10,6 +10,7 @@ import { LogoutLink } from "./Logout"
 import { Routes, Route } from "react-router-dom";
 import { CartedProductsIndex } from "./CartedProductsIndex"
 import { OrdersIndex } from "./OrdersIndex"
+import { OrdersShow } from "./OrdersShow"
 
 
 export function Content() {
@@ -91,6 +92,7 @@ export function Content() {
         <Route path="/products/new" element={<ProductsNew onCreateProduct={handleCreateProduct}/>} />
         <Route path="/cart" element={ <CartedProductsIndex/>} />
         <Route path="/orders" element={<OrdersIndex />} />
+        <Route path="/orders/:id" element={<OrdersShow />} />
       </Routes>
       
       <LogoutLink/>

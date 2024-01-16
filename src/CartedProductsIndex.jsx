@@ -16,6 +16,7 @@ export function CartedProductsIndex() {
     console.log('creating order....')
     axios.post('http://localhost:3000/orders.json').then(response => {
       console.log(response.data);
+      window.location.href = `/orders/${response.data.id}`
     })
   }
 
