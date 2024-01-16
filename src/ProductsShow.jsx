@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { useState } from 'react';
 
 export function ProductsShow(props) {
+  const [isOpen, setIsOpen] = useState(true);
 
   const addToCart = (event) => {
     console.log('adding to cart...')
@@ -8,18 +10,19 @@ export function ProductsShow(props) {
     const params = new FormData(event.target);    
     axios.post('http://localhost:3000/add_to_cart.json', params).then(response => {
       console.log(response.data)
+      setIsOpen(false);
     })
   }
   
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const params = new FormData(event.target);
-    props.onUpdateProduct(props.product.id, params, () => event.target.reset());
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const params = new FormData(event.target);
+  //   props.onUpdateProduct(props.product.id, params, () => event.target.reset());
+  // };
 
-  const handleClick = () => {
-    props.onDestroyProduct(props.product);
-  };
+  // const handleClick = () => {
+  //   props.onDestroyProduct(props.product);
+  // };
   
   return (
     <div>

@@ -1,13 +1,16 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 export function ProductsNew(props) {
   const [suppliers, setSuppliers] = useState([])
+  const navigate = useNavigate();
   
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
     props.onCreateProduct(params, () => event.target.reset());
+    navigate('/');
     console.log('creating product')
   };
 
@@ -24,9 +27,6 @@ export function ProductsNew(props) {
   return (
     <div>
       <h1>New Product</h1>
-      {suppliers.map(supplier => (
-        <p key={supplier.id}>{supplier.name}</p>
-      ))}
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" />
@@ -38,9 +38,9 @@ export function ProductsNew(props) {
           Description: <input name="description" type="text" />
         </div>
         <div>
-          <select name="supplier" id="cars">
+          <select name="supplier">
             {suppliers.map(supplier => (
-              <option>{supplier.name}</option>
+              <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
             ))}
           </select>
         </div>

@@ -9,6 +9,7 @@ import { Login } from "./Login"
 import { LogoutLink } from "./Logout"
 import { Routes, Route } from "react-router-dom";
 import { CartedProductsIndex } from "./CartedProductsIndex"
+import { OrdersIndex } from "./OrdersIndex"
 
 
 export function Content() {
@@ -33,7 +34,7 @@ export function Content() {
   };
   const handleCreateProduct = (params, successCallback) => {
     console.log("handleCreateProducts", params);
-    axios.post("http://localhost:3000/products.json", params).then((response) => {
+    axios.post("http://localhost:3000/products/new.json", params).then((response) => {
       setProducts([...products, response.data]);
       successCallback();
     });
@@ -89,6 +90,7 @@ export function Content() {
         <Route path="/products" element={ <ProductsIndex products={products} onShowProduct={handleShowProduct}/>} />
         <Route path="/products/new" element={<ProductsNew onCreateProduct={handleCreateProduct}/>} />
         <Route path="/cart" element={ <CartedProductsIndex/>} />
+        <Route path="/orders" element={<OrdersIndex />} />
       </Routes>
       
       <LogoutLink/>
