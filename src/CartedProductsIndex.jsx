@@ -26,7 +26,8 @@ export function CartedProductsIndex() {
 
   return (
     <div>
-      <p>This is the shopping cart</p>
+      <h2>Cart:</h2>
+      <p>-------------------------</p>
       {cartedProducts.map(cartedProduct => (
         <div key={cartedProduct.id}>
           {/* <p>{JSON.stringify(cartedProduct)}</p> */}

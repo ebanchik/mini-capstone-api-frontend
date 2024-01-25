@@ -88,14 +88,13 @@ export function Content() {
     <div className="container"></div>
       <Routes>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={ <ProductsIndex products={products} onShowProduct={handleShowProduct}/>} />
         <Route path="/products" element={ <ProductsIndex products={products} onShowProduct={handleShowProduct}/>} />
         <Route path="/products/new" element={<ProductsNew onCreateProduct={handleCreateProduct}/>} />
         <Route path="/cart" element={ <CartedProductsIndex/>} />
         <Route path="/orders" element={<OrdersIndex />} />
         <Route path="/orders/:id" element={<OrdersShow />} />
-        <Route path="/highchart" element={<ChartExample />} />
       </Routes>
       
       <LogoutLink/>

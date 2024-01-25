@@ -9,7 +9,7 @@ export function ProductsIndex(props) {
       <p>Search: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value) } list="names" /></p>
       <datalist id="names">
         {props.products.map(product => (
-          <option>{product.title}</option>
+          <option key={product.id}>{product.title}</option>
         ))}
       </datalist>
       <div className="row">
@@ -21,9 +21,10 @@ export function ProductsIndex(props) {
         <div key={product.id} className="col">
           <div className="card h-100">
             <div className="card-body">
+              <img width="300px" src={product.images[0].url} className="card-img-top" alt="..."/>
               <h5 className="card-header">{product.name}</h5>
               <p className="card-text">{product.description}</p>
-              {/* <img src={product.images[0].url} className="card-img-top" alt="..."/> */}
+              <p className="card-text">{product.price}</p>
               <button className="btn btn-primary" onClick={() => props.onShowProduct(product)}>More info</button>            
             </div>
           </div>

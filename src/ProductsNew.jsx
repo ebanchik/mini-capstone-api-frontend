@@ -37,6 +37,7 @@ export function ProductsNew(props) {
         <div>
           Description: <input name="description" type="text" />
         </div>
+          Image: <input name="url" type="text" />
         <div>
           <select name="supplier">
             {suppliers.map(supplier => (
