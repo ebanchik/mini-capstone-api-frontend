@@ -6,7 +6,12 @@ export function ProductsIndex(props) {
   return (
     <div id="products-index">
       <h1>All products</h1>
-      <p>Search filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} /></p>
+      <p>Search: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value) } list="names" /></p>
+      <datalist id="names">
+        {props.products.map(product => (
+          <option>{product.title}</option>
+        ))}
+      </datalist>
       <div className="row">
       {props.products.filter(
           product => product.name.toLowerCase()

@@ -1,19 +1,24 @@
 import axios from 'axios'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export function ProductsShow(props) {
-  const [isOpen, setIsOpen] = useState(true);
-
   const addToCart = (event) => {
     console.log('adding to cart...')
     event.preventDefault();    
     const params = new FormData(event.target);    
     axios.post('http://localhost:3000/add_to_cart.json', params).then(response => {
       console.log(response.data)
-      setIsOpen(false);
+      props.onClose()
     })
+
   }
   
+  let navigate = useNavigate();
+    const routeChange = () => {
+      let path = "/cart";
+      navigate(path);
+    }
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const params = new FormData(event.target);
@@ -39,7 +44,7 @@ export function ProductsShow(props) {
         <div>
           Quantity: <input name="quantity" type="text" />
         </div>
-        <button type="submit">Add To Cart</button>
+        <button onClick={routeChange} type="submit">Add To Cart</button>
 
       </form>
       

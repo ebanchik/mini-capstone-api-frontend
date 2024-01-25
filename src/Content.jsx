@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import { CartedProductsIndex } from "./CartedProductsIndex"
 import { OrdersIndex } from "./OrdersIndex"
 import { OrdersShow } from "./OrdersShow"
+import { ChartExample } from "./HighChart"
 
 
 export function Content() {
@@ -78,6 +79,7 @@ export function Content() {
   };
 
 
+
   useEffect(handleIndexProducts, []);
   // useEffect(handleIndexCart, []);
 
@@ -93,11 +95,12 @@ export function Content() {
         <Route path="/cart" element={ <CartedProductsIndex/>} />
         <Route path="/orders" element={<OrdersIndex />} />
         <Route path="/orders/:id" element={<OrdersShow />} />
+        <Route path="/highchart" element={<ChartExample />} />
       </Routes>
       
       <LogoutLink/>
       <Modal show={isProductShowVisible} onClose={handleClose}>
-        <ProductsShow product={currentProduct} onUpdateProduct={handleUpdateProduct} onDestroyProduct={handleDestroyProduct}/>
+        <ProductsShow product={currentProduct} onClose={handleClose} onUpdateProduct={handleUpdateProduct} onDestroyProduct={handleDestroyProduct}/>
       </Modal>
     </div>
   );
